@@ -11,7 +11,7 @@ class Blockchain
 			nonce = rand(100000)
 			history << nonce
 			hashed = Digest::SHA256.hexdigest(nonce.to_s) #nonce 값을 문자열화 한 다음, SHA256 값으로 hash 함
-		 end while hashed[0..3] != '0000'#	hashed의 값이 0000이 나올 때까지.
+		 end while hashed[0..3] != '0000'   #hashed의 값이 0000이 나올 때까지.
 		#end while nonce != 0 #100000 중에 랜덤으로 숫자를 뽑는데, 0이 나올 때까지.
 		#Time.now.to_f - current_time
 		nonce
@@ -26,8 +26,8 @@ class Blockchain
 			"index" => @chain.size + 1,
 			"time" => Time.now,
 			"nonce" => nonce,
-			"previous_adress" => Digest::SHA256.hexdigest(last_block.to_s)
-		}
+			"previous_adress" => Digest::SHA256.hexdigest(last_block.to_s) #이전의 블록을 문자열로 바꿔서 암호화를 시킨다.
+		} # {} --> 안에 들어가는 내용을 해시 데이터화 한다.
 
 		@chain << block
 		block
