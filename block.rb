@@ -4,6 +4,10 @@ class Blockchain
 		@chain =[] #'@'가 붙은 내용은 이하의 모든 클래스에 다 적용됨
 	end
 
+	def make_a_trans(s,r,a) #
+		s + r + a
+	end
+
 	def mining
 		history =[] #nonce 값을 찾는데 들어간 내역을 리스트화 한다
 		current_time = Time.now.to_f #1970.1.1부터 얼마나 걸렸는지를 알려줌 

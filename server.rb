@@ -24,5 +24,6 @@ get '/mine' do
 end
 
 get '/trans' do
-  params["sender"] + params["recv"] + params["amount"] #코인을 보내는 사람의 주소를 읽어라. 
+	Blockchain.make_a_trans(params["sender"], params["recv"], params["amount"])
+  #params["sender"] + params["recv"] + params["amount"] #코인을 보내는 사람/받는 사람/코인의 양 값을 읽어라. 
 end
