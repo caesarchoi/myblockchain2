@@ -1,8 +1,16 @@
+require 'securerandom'
+
 class Blockchain
 
 	def initialize
-		@chain =[] #'@'가 붙은 내용은 이하의 모든 클래스에 다 적용됨
+		@chain =[] #'@'가 붙은 내용은 이하의 모든 클래스에 다 적용됨 / chain 값을 리스트화 한다.
 		@trans =[] 
+		@wallet = {} 
+	end
+
+	def make_a_new_wallet
+		SecureRandom.uuid.gsub("-","") #SecureRandom 대문자, 소문자 주의!!!, gusb: ("앞내용", "뒷내용") 으로 대체한다.
+
 	end
 
 	def make_a_trans(s,r,a) #
@@ -16,8 +24,6 @@ class Blockchain
 	end
 
 	def mining
-		history =[] #nonce 값을 찾는데 들어간 내역을 리스트화 한다
-		current_time = Time.now.to_f #1970.1.1부터 얼마나 걸렸는지를 알려줌 
 		begin 
 			nonce = rand(100000)
 			history << nonce

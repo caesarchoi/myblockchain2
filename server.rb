@@ -21,10 +21,15 @@ message
 end
 
 get '/mine' do
-  aaa.mining.to_s #to_s : 숫자를 문자로 바꾸어주는 명령어
+aaa.mining.to_s #to_s : 숫자를 문자로 바꾸어주는 명령어
 end
 
 get '/trans' do
 	aaa.make_a_trans(params["sender"], params["recv"], params["amount"]).to_s
   #params["sender"] + params["recv"] + params["amount"] 코인을 보내는 사람/받는 사람/코인의 양 값을 읽어라. 
+end
+
+get '/new_wallet' do
+ aaa.make_a_new_wallet.to_s
+	
 end
