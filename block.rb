@@ -8,6 +8,10 @@ class Blockchain
 		@wallet = {} 
 	end
 
+	def show show_all_wallet
+		@wallet
+	end
+
 	#
 
 	def make_a_new_wallet
@@ -29,9 +33,9 @@ class Blockchain
 		@wallet[r] = @wallet[r].to_f + a.to_f
 
 		trans = {
-			"sender" => s, #sender는 s
-			"receiver" => r, #receiver는 r
-			"amount" => a #amount는 a
+			"보낸사람" => s, #sender는 s
+			"받은사람" => r, #receiver는 r
+			"코인" => a #amount는 a
 		}
 		@trans << trans
 		@trans #end 위의 값은 출력
