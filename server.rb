@@ -4,15 +4,14 @@ require './block' # '/' 이후에 폴더명을 쓰면 그 폴더에 있는 파�
 aaa = Blockchain.new  #Blockchain 클래스를 계속 바꿀 건데, 그 이름이 aaa
 
 get '/' do 
-
-	message = "<center>"
+	message  = ""
 	aaa.all_blocks.each do |b|
 		message << "번호:" + b['index'].to_s + "<br>"
 		message << "시간:" + b['time'].to_s + "<br>" # br: 한 줄 띄우기
 		message << "Nonce:" + b['nonce'].to_s + "<br>"
 		message << "앞 주소:" + b['previous_adress'].to_s + "<br>"
 		message << "내 주소:" + Digest::SHA256.hexdigest(b.to_s) + "<br>"
-		message << "Transactions:"  + b['transactions'].to_s + "<br>"
+		message << "거래:"  + b['transactions'].to_s + "<br>"
 		message << "<hr>" # "<hr>" : 구분선 주기 
 end
 
