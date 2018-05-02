@@ -12,6 +12,7 @@ get '/' do
 		message << "Nonce:" + b['nonce'].to_s + "<br>"
 		message << "앞 주소:" + b['previous_adress'].to_s + "<br>"
 		message << "내 주소:" + Digest::SHA256.hexdigest(b.to_s) + "<br>"
+		message << "Transactions:"  + b['transactions'].to_s + "<br>"
 		message << "<hr>" # "<hr>" : 구분선 주기 
 end
 
@@ -24,6 +25,6 @@ get '/mine' do
 end
 
 get '/trans' do
-	Blockchain.make_a_trans(params["sender"], params["recv"], params["amount"])
-  #params["sender"] + params["recv"] + params["amount"] #코인을 보내는 사람/받는 사람/코인의 양 값을 읽어라. 
+	aaa.make_a_trans(params["sender"], params["recv"], params["amount"]).to_s
+  #params["sender"] + params["recv"] + params["amount"] 코인을 보내는 사람/받는 사람/코인의 양 값을 읽어라. 
 end
