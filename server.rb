@@ -23,6 +23,6 @@ get '/mine' do
   aaa.mining.to_s #to_s : 숫자를 문자로 바꾸어주는 명령어
 end
 
-get '/transaction' do
-  aaa.transaction
+get '/trans' do
+  params["sender"] + params["recv"] + params["amount"] #코인을 보내는 사람의 주소를 읽어라. 
 end

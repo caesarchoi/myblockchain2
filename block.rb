@@ -11,7 +11,7 @@ class Blockchain
 			nonce = rand(100000)
 			history << nonce
 			hashed = Digest::SHA256.hexdigest(nonce.to_s) #nonce 값을 문자열화 한 다음, SHA256 값으로 hash 함
-		 end while hashed[0..3] != '0000'   #hashed의 값이 0000이 나올 때까지.
+		 end   #hashed의 값이 0000이 나올 때까지.
 		#end while nonce != 0 #100000 중에 랜덤으로 숫자를 뽑는데, 0이 나올 때까지.
 		#Time.now.to_f - current_time
 		nonce
