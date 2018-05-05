@@ -83,12 +83,21 @@ class Blockchain
 		@chain		
 	end
 
+	def recv(blocks)
+		blocks.each do |aaa|
+			@chain << aaa
+		end
+		@chain
+	end
+
 def ask_other_block 
 		@node.each do |n| #@node를 돌면서 나온 값을 하나씩 'n'에 저장한다.
 		other_block = HTTParty.get("http://localhost:"+ n +"/number_of_blocks").body #나온 값을 메세지에 저장한다.
 
-		if @chain.size < other_block.to_i #다른 블록의 사이즈가 크다면 그 블록을 
-			@chain = []
+		if @chain.size < other_block.to_i #다른 블록의 사이즈가 크다면 그 블록을
+			jsoned_chain = @chain.to_json 음
+			HTTParty.get("http://localhost:"+ n +"/recv?blocks=" + jsoned_chain)
+			@chain = [] #그 값을 체인에 저장한다.
 		end
 	end
 end
