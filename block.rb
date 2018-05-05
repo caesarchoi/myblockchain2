@@ -83,12 +83,14 @@ class Blockchain
 		@chain		
 	end
 
-	def ask_other_block 
-		message = [] # 메세지라는 빈 배열을 만듦
+def ask_other_block 
 		@node.each do |n| #@node를 돌면서 나온 값을 하나씩 'n'에 저장한다.
-		message << HTTParty.get("http://localhost:"+ n +"/number_of_blocks").body #나온 값을 메세지에 저장한다.
+		other_block = HTTParty.get("http://localhost:"+ n +"/number_of_blocks").body #나온 값을 메세지에 저장한다.
+
+		if @chain.size < other_block.to_i #다른 블록의 사이즈가 크다면 그 블록을 
+			@chain = []
+		end
 	end
-	message #메세지를 출력
 end
 
 	def add_node(node)
