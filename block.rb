@@ -1,11 +1,13 @@
 require 'securerandom'
+require 'httparty'
 
 class Blockchain
 
 	def initialize
 		@chain =[] #'@'가 붙은 내용은 이하의 모든 클래스에 다 적용됨 / chain 값을 리스트화 한다.
 		@trans =[] 
-		@wallet = {} 
+		@wallet = {}
+		@node = [] 
 	end
 
 	def show show_all_wallet
@@ -21,7 +23,7 @@ class Blockchain
 	end
 
 	def make_a_trans(s,r,a) #
-		if @wallet[s].nil?
+		if @wallet[s].nil? #nil : 리스트에 없는 값
 			"보내는 주소가 잘못되었습니다."
 		elsif @wallet[r].nil?
 			"받는 주소가 잘못되었습니다."
@@ -31,6 +33,8 @@ class Blockchain
 
 		@wallet[s] = @wallet[s].to_f - a.to_f
 		@wallet[r] = @wallet[r].to_f + a.to_f
+		#블록체인은 거래가 일어나고 거래 사실이 블록에 기록된 후 2-3개의 블록이 이어붙여지고 컨펌이 난 후에야 확정된다. 
+		#거래 직후 바로 기록이 남는 형태는 기존의 은행과 같은 형태이다.
 
 		trans = {
 			"보낸사람" => s, #sender는 s
@@ -50,9 +54,7 @@ class Blockchain
 			nonce = rand(100000)
 			history << nonce
 			hashed = Digest::SHA256.hexdigest(nonce.to_s) #nonce 값을 문자열화 한 다음, SHA256 값으로 hash 함
-		end while hashed[0..3] != "0000"   
-
-		#hashed의 값이 0000이 나올 때까지.
+		end while hashed[0..3] != "0000"   #hashed의 값이 0000이 나올 때까지.
 		#end while nonce != 0 #100000 중에 랜덤으로 숫자를 뽑는데, 0이 나올 때까지.
 		#Time.now.to_f - current_time
 
@@ -79,6 +81,20 @@ class Blockchain
 
 	def all_blocks
 		@chain		
+	end
+
+	def ask_other_block 
+		message = [] # 메세지라는 빈 배열을 만듦
+		@node.each do |n| #@node를 돌면서 나온 값을 하나씩 'n'에 저장한다.
+		message << HTTParty.get("http://localhost:"+ n +"/number_of_blocks").body #나온 값을 메세지에 저장한다.
+	end
+	message #메세지를 출력
+end
+
+	def add_node(node)
+		@node << node
+		@node.uniq!
+		@node
 	end
 
 end
