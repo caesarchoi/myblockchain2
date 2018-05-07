@@ -95,9 +95,9 @@ def ask_other_block
 		other_block = HTTParty.get("http://localhost:"+ n +"/number_of_blocks").body #나온 값을 메세지에 저장한다.
 
 		if @chain.size < other_block.to_i #다른 블록의 사이즈가 크다면 그 블록을
-			jsoned_chain = @chain.to_json 음
-			HTTParty.get("http://localhost:"+ n +"/recv?blocks=" + jsoned_chain)
-			@chain = [] #그 값을 체인에 저장한다.
+			jsoned_chain = @chain.to_json
+			full_chain = HTTParty.get("http://localhost:"+ n +"/recv?blocks=" + jsoned_chain).body
+			@chain = JSON.parse(full_chain) #그 값을 체인에 저장한다.
 		end
 	end
 end

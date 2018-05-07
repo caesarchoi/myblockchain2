@@ -10,7 +10,8 @@ end
 
 get '/recv' do
 	recv_block = JSON.parse(params["blocks"]) #'blocks'를 읽은 값을 json으로 parse해서 recv_blodck에 넣는다
-	aaa.recv(recv_block)
+	aaa.recv(recv_block) #'aaa'에 recv_blocks 값을 넣어준다.
+	aaa.all_blocks.to_json #'aaa'에 recv_blocks가 들어간 값을 json 형태로 parsing 함
 	end
 
 get '/ask' do
